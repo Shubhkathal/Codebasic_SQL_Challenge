@@ -1,0 +1,12 @@
+SELECT 
+    dp.segment,
+    COUNT(CASE WHEN fs.fiscal_year = 2020 THEN fs.product_code END) AS product_count_2020,
+    COUNT(CASE WHEN fs.fiscal_year = 2021 THEN fs.product_code END) AS product_count_2021,
+    COUNT(CASE WHEN fs.fiscal_year = 2021 THEN fs.product_code END) - 
+    COUNT(CASE WHEN fs.fiscal_year = 2020 THEN fs.product_code END) AS difference
+FROM 
+    dim_product dp
+LEFT JOIN 
+    fact_sales_monthly fs ON dp.product_code = fs.product_code
+GROUP BY 
+    segment

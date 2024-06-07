@@ -1,0 +1,12 @@
+
+SELECT A AS unique_product_2020, B AS unique_products_2021, ROUND((Y.B - X.A) * 100.0 / X.A, 2) AS percentage_change
+FROM
+    (SELECT COUNT(DISTINCT product_code) AS A 
+     FROM fact_sales_monthly
+     WHERE fiscal_year = 2020) X,
+    (SELECT COUNT(DISTINCT product_code) AS B 
+     FROM fact_sales_monthly
+     WHERE fiscal_year = 2021) Y;
+     
+     
+     
